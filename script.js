@@ -15,11 +15,15 @@ const FLIGHT_SPREAD = 0.3;           // разброс задержек стар
 
 // ---------- Получаем холст и "кисть" ----------
 const canvas = document.getElementById('sky');
+const text = document.getElementById('text');
+const text2 = document.getElementById('hint');
 const ctx = canvas.getContext('2d'); // контекст 2D-рисования (~ GraphicsContext)
 
 // Логический размер окна (в CSS-пикселях)
 let viewWidth = 0;
 let viewHeight = 0;
+
+let counter = 0;
 
 const stars = [];   // звёзды на небе
 let skyOpened = false;  // открыла ли она небо кнопкой (влияет на resize)
@@ -243,6 +247,15 @@ const startButton = document.getElementById('startButton');
 const nightLayer = document.getElementById('night');
 
 startButton.addEventListener('click', () => {
+
+    if (counter === 0){
+        text.textContent = '';
+        text2.textContent = 'Нажми еще раз';
+        counter = 1;
+        return;
+    }
+
+
     if (skyOpened) return;   // защита от повторного клика
 
     // 1. Узнаём, где кнопка находится на экране прямо сейчас.
