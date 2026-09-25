@@ -5,20 +5,23 @@
     box-sizing: border-box;
 }
 
-html,
-body {
+html {
     height: 100%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    scrollbar-width: none;
 }
 
 body {
     /* Дневная основа страницы: чистый белый лист */
     background-color: #ffffff;
-    overflow: hidden; /* убираем полосы прокрутки — страница ровно на один экран */
 }
+
+/* Пока страница не «открыта» (нет класса is-open на body),
+   все секции, кроме первой, вынуты из раскладки.
+   Первая секция остаётся: в ней карточка с кнопкой и само поздравление. */
+body:not(.is-open) .screen:not(:first-of-type) {
+    display: none;
+}
+
 
 /* Холст закреплён на весь экран и лежит "под" будущим контентом */
 #sky {
@@ -46,11 +49,17 @@ body {
 }
 
 .defaultBox {
-    border-radius: 15px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
     background-color: #050510;
     border-style: solid;
     border-width: 1px;
     border-color: #202020;
+    padding: 30px;
+    height: 10vh;
 }
 
 .welcomeBox {
@@ -103,4 +112,62 @@ body {
 
 #startButton:hover{
     background-color: #ffffff;
+}
+
+/* ============================================================
+   БОЛЬШОЕ ПОЗДРАВЛЕНИЕ
+   Проявляется, когда звёзды долетели (класс добавляет JavaScript)
+   ============================================================ */
+/* ПЕРВЫЙ ЭКРАН: высотой в окно, содержимое центрируется сеткой.
+   Карточка и поздравление лежат в ОДНОЙ ячейке и потому накладываются друг на друга. */
+.screen {
+    min-height: 100vh;
+    min-height: 100dvh;   /* на телефонах: реальная высота без панелей браузера */
+    display: grid;
+    place-items: center;  /* центрируем по горизонтали и вертикали */
+    padding: 24px;
+}
+
+.welcomeBox,
+.finalMessage {
+    grid-area: 1 / 1;     /* одна и та же ячейка -> блоки накладываются */
+}
+
+/* Большое поздравление: обычный элемент сетки, а НЕ fixed,
+   поэтому оно прокручивается вместе со страницей. */
+.finalMessage {
+    text-align: center;
+    pointer-events: none;   /* текст не перехватывает клики мышью */
+
+    opacity: 0;                                /* пока невидим */
+    transform: translateY(24px) scale(0.96);   /* и чуть ниже и чуть меньше */
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+/* Состояние «пора показать»: класс добавляет JavaScript с задержкой */
+.finalMessage.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.finalMessage p {
+    /* clamp(минимум, от ширины экрана, максимум) — размер подстраивается сам */
+    font-size: clamp(28px, 7vw, 64px);
+    line-height: 1.25;
+    font-weight: bold;
+    color: #f2ecff;
+    /* свечение вокруг букв вместо твёрдой тени — в стиле ночного неба */
+    text-shadow: 0 0 12px rgba(160, 120, 255, 0.6), 0 0 30px rgba(120, 80, 255, 0.35);
+}
+
+/* Заглушка во второй секции — замени своим содержимым */
+.scrollHint {
+    color: rgba(212, 202, 255, 0.8);
+    font-size: 18px;
+    text-align: center;
+}
+
+.selebrate{
+    color: #ffffff;
+    font-size: 35px;
 }

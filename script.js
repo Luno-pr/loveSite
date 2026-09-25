@@ -245,6 +245,15 @@ requestAnimationFrame(frame);
 const welcomeBox = document.getElementById('welcome');
 const startButton = document.getElementById('startButton');
 const nightLayer = document.getElementById('night');
+const finalMessage = document.getElementById('finalMessage');
+
+/* Сколько ждать, пока проиграется анимация звёзд.
+   Самая долгая звезда летит FLIGHT_MAX_DURATION секунд, плюс задержка старта.
+   На 1000 умножаем потому, что таймеры в JS считают в МИЛЛИСЕКУНДАХ,
+   а FLIGHT_PAUSE_FACTOR — во сколько раз пауза длиннее полёта
+   (1 = текст появляется ровно в момент посадки последней звезды). */
+const FLIGHT_PAUSE_FACTOR = 2;
+const STAR_FLIGHT_MS = Math.round((FLIGHT_MAX_DURATION + FLIGHT_SPREAD) * 1000 * FLIGHT_PAUSE_FACTOR);
 
 startButton.addEventListener('click', () => {
 
@@ -282,5 +291,12 @@ startButton.addEventListener('click', () => {
 
     // 4. Зажигаем небо ровно из точки кнопки
     revealSky(originX, originY);
+
+    // 5. Пока звёзды летят, ждём в стороне. Когда они долетели — добавляем
+    //    класс, а CSS плавно поднимает прозрачность с 0 до 1 и сдвигает текст на место.
+    setTimeout(() => {
+        document.body.classList.add('is-open');
+        finalMessage.classList.add('is-visible');
+    }, STAR_FLIGHT_MS);
 });
 

@@ -13,11 +13,40 @@
     <!-- Холст, на котором JavaScript рисует звёздное небо -->
     <canvas id="sky"></canvas>
 
-    <div class="welcomeBox" id="welcome">
-        <p class="text" id="text">С днём рождения!</p>
-        <p class="hint" id="hint">Нажми на кнопку чтобы увидеть<br>мой сюрприз</p>
-        <button id="startButton" type="button">Нажми</button>
-    </div>
+    <!-- ПЕРВЫЙ ЭКРАН: карточка-приглашение и большое поздравление.
+         Оба блока лежат в одной ячейке сетки, поэтому накладываются друг на друга -->
+    <section class="screen">
+        <div class="welcomeBox" id="welcome">
+            <p class="text" id="text">С днём рождения!</p>
+            <p class="hint" id="hint">Нажми на кнопку чтобы увидеть<br>мой сюрприз</p>
+            <button id="startButton" type="button">Нажми</button>
+        </div>
+
+        <div class="finalMessage" id="finalMessage">
+            <p>Листай вниз</p>
+        </div>
+    </section>
+
+    <!-- ВТОРАЯ СЕКЦИЯ: сюда добавляй всё, что должно быть ниже.
+         Фон со звёздами закреплён в окне и остаётся на месте при прокрутке -->
+    <section class="screen">
+        <div class="defaultBox ">
+            <p class="selebrate">Я тебя поздравляю моя хорошая с днём рождения!</p>
+        </div>
+        <div class="defaultBox ">
+            <p class="selebrate">Желаю тебе счастья, здоровья,<br>любви и спокойствия<br></p>
+        </div>
+    </section>
+
+    <section class="screen">
+        <div class="defaultBox ">
+            <p class="selebrate">Желаю тебе чтобы все твои мечты сбывались,<br>а цели достигались</p>
+        </div>
+        <div class="defaultBox ">
+            <p class="selebrate">И конечно же,<br> я тебя очень сильно люблю моя хорошая!</p>
+        </div>
+    </section>
+
     <script src="script.js"></script>
 </body>
 </html>
