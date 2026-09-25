@@ -1,0 +1,103 @@
+/* Сброс отступов по умолчанию — чтобы фон был вплотную к краям окна */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body {
+    /* Дневная основа страницы: чистый белый лист */
+    background-color: #ffffff;
+    overflow: hidden; /* убираем полосы прокрутки — страница ровно на один экран */
+}
+
+/* Холст закреплён на весь экран и лежит "под" будущим контентом */
+#sky {
+    position: fixed;
+    inset: 0;
+    display: block;
+    z-index: -1;
+}
+
+/* Слой ночи: перекрывает белый фон, но лежит ПОД холстом со звёздами,
+   поэтому звёзды видны поверх градиента. Изначально полностью прозрачен. */
+.nightLayer {
+    position: fixed;
+    inset: 0;
+    z-index: -2;                    /* глубже холста (у него -1), но выше белой основы */
+    pointer-events: none;           /* слой не перехватывает клики мышью */
+    opacity: 0;                     /* день: слой невидим */
+    transition: opacity 1.2s ease;  /* ночь наплывает плавно */
+    background: linear-gradient(180deg, #050510 40%, #0c0527 70%, #190a3b 100%);
+}
+
+/* Состояние «ночь»: класс добавляет JavaScript по клику на кнопку */
+.nightLayer.is-visible {
+    opacity: 1;
+}
+
+.defaultBox {
+    border-radius: 15px;
+    background-color: #050510;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #202020;
+}
+
+.welcomeBox {
+    width: 320px;
+    padding: 32px 24px;
+    text-align: center;
+
+    /* flex-колонка: элементы внутри идут друг под другом с отступом gap */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+
+    /* транзишн нужен, чтобы потом ПЛАВНО спрятать блок (класс .is-hidden) */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Класс-«переключатель»: JS его добавляет — и блок уезжает и гаснет */
+.is-hidden {
+    opacity: 0;
+    transform: scale(0.85);
+    pointer-events: none; /* блок больше не ловит клики мышью */
+}
+
+.text {
+    color: #1b1145;
+    font-size: 20px;
+}
+
+.hint {
+    color: rgba(30, 22, 60, 0.68);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+#startButton {
+    padding: 12px 28px;
+    font-size: 16px;
+    font-family: inherit;   /* кнопки не наследуют шрифт — задаём вручную */
+    color: #ffffff;
+    background: #6c4bd8;
+    border: 1px solid #6c4bd8;
+    border-radius: 999px;   /* большое значение = форма «таблетки» */
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.25s ease;
+}
+
+#startButton:hover {
+    background: #5a3cc0;
+    transform: translateY(-2px);  /* чуть приподнимается при наведении */
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днём Рождения!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Слой ночи: лежит на белой основе и ждёт клика по кнопке -->
+    <div class="nightLayer" id="night"></div>
+
+    <!-- Холст, на котором JavaScript рисует звёздное небо -->
+    <canvas id="sky"></canvas>
+
+    <div class="welcomeBox" id="welcome">
+        <p class="text">С днём рождения!</p>
+        <p class="hint">Нажми на кнопку чтобы увидеть<br>мой сюрприз</p>
+        <button id="startButton" type="button">Открыть</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
