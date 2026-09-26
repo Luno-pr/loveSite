@@ -333,10 +333,46 @@ for (const element of document.querySelectorAll('.reveal')) {
  * КЛИК ПО БОЛЬШОЙ КНОПКЕ («Большое сообщение»)
  * ============================================================ */
 const bigButton = document.getElementById('bigButton');
+const bigMes = document.getElementById('bigMes');
 if (bigButton) {
     bigButton.addEventListener('click', () => {
+        document.body.classList.add('is-letter-open');
+
+        bigMes.style.display = 'grid';
+
+        void bigMes.offsetHeight;
+
+
+        bigMes.classList.add('isVisible');
+
         // Здесь будет твоё действие (открытие письма, модалка, переход и т.д.)
         console.log('Клик по большой кнопке!');
     });
 }
+
+
+/* ============================================================
+ * КЛИК ПО КНОПКЕ «Я прочитала» (.readen)
+ * ============================================================ */
+const readButton = document.querySelector('.readen');
+const endingScreen = document.getElementById('endingScreen');
+
+if (readButton) {
+    readButton.addEventListener('click', () => {
+        // 1. Снимаем состояние письма и переводим в финальное состояние
+        document.body.classList.remove('is-letter-open');
+        document.body.classList.add('is-ended');
+
+        // 2. Сбрасываем скролл наверх
+        window.scrollTo(0, 0);
+
+        // 3. Плавно проявляем финальную секцию
+        if (endingScreen) {
+            endingScreen.style.display = 'grid';
+            void endingScreen.offsetHeight;
+            endingScreen.classList.add('isVisible');
+        }
+    });
+}
+
 

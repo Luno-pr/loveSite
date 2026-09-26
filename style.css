@@ -22,6 +22,14 @@ body:not(.is-open) .screen:not(:first-of-type) {
     display: none;
 }
 
+body.is-letter-open .screen:not(#bigMes) {
+    display: none !important;
+}
+
+/* Когда прочитано письмо — скрываем абсолютно ВСЕ секции, кроме финальной */
+body.is-ended .screen:not(#endingScreen) {
+    display: none !important;
+}
 
 /* Холст закреплён на весь экран и лежит "под" будущим контентом */
 #sky {
@@ -91,6 +99,43 @@ body:not(.is-open) .screen:not(:first-of-type) {
 .text {
     color: #1b1145;
     font-size: 20px;
+}
+
+.messText{
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1.6;
+
+    height: 100%;
+    width: 100%;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overflow-wrap: break-word;
+    word-break: break-word;
+
+    padding-right: 15px;
+    box-sizing: border-box;
+    margin: 0;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.messText::-webkit-scrollbar{
+    width: 8px;
+}
+
+
+.messText::-webkit-scrollbar-track{
+    background: transparent;
+}
+
+
+.messButtText{
+    color: #ffffff;
+    font-size: 16px;
 }
 
 .hint {
@@ -167,13 +212,6 @@ body:not(.is-open) .screen:not(:first-of-type) {
     /* свечение вокруг букв вместо твёрдой тени — в стиле ночного неба */
 }
 
-/* Заглушка во второй секции — замени своим содержимым */
-.scrollHint {
-    color: rgba(212, 202, 255, 0.8);
-    font-size: 18px;
-    text-align: center;
-}
-
 .selebrate{
     color: #ffffff;
     font-size: 35px;
@@ -190,11 +228,11 @@ body:not(.is-open) .screen:not(:first-of-type) {
     align-items: center;
     justify-content: center;
     text-align: center;
-    border-style: solid;
+    border: none;
     border-width: 1px;
     background-color: #1f1f1f88;
-    border-color: #ffffffbb;
-    border-radius: 999px;
+    border-radius: 50px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.73);
     padding: 24px 48px;
     cursor: pointer;
     font-family: inherit;
@@ -204,7 +242,7 @@ body:not(.is-open) .screen:not(:first-of-type) {
 }
 
 .bigButt:hover{
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 /* ============================================================
@@ -224,3 +262,68 @@ body:not(.is-open) .screen:not(:first-of-type) {
     opacity: 1;
     translate: 0 0;
 }
+
+.bigMes{
+    display: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.bigMes.isVisible{
+    opacity: 1;
+}
+
+.bigMess{
+    width: 110vh;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #1f1f1f88;
+    border-color: #ffffffbb;
+    padding: 50px;
+    border-radius: 50px;
+    box-sizing: border-box;
+}
+
+.readen{
+    margin-top: auto;
+    width: 120px;
+    height: 40px;
+    border-style: solid;
+    border-radius: 20px;
+    border-width: 1px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+.endingScreen {
+    display: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.endingScreen.isVisible {
+    opacity: 1;
+}
+
+.endingBox {
+    text-align: center;
+    padding: 20px;
+}
+
+.endingText {
+    color: #ffffff;
+    font-size: clamp(32px, 6vw, 64px);
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(255, 105, 180, 0.5), 0 0 20px rgba(255, 20, 145, 0.3), 0 0 30px rgba(180, 100, 255, 0.4);
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+
