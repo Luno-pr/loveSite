@@ -297,6 +297,7 @@ body.is-ended .screen:not(#endingScreen) {
     border-style: solid;
     border-radius: 20px;
     border-width: 1px;
+    border-color: #ffffffbb;
     background-color: transparent;
     cursor: pointer;
 }
