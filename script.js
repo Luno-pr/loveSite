@@ -253,7 +253,7 @@ const finalMessage = document.getElementById('finalMessage');
    а FLIGHT_PAUSE_FACTOR — во сколько раз пауза длиннее полёта
    (1 = текст появляется ровно в момент посадки последней звезды). */
 const FLIGHT_PAUSE_FACTOR = 2;
-const STAR_FLIGHT_MS = Math.round((FLIGHT_MAX_DURATION + FLIGHT_SPREAD) * 1000 * FLIGHT_PAUSE_FACTOR);
+const STAR_FLIGHT_MS = Math.round((FLIGHT_MAX_DURATION + FLIGHT_SPREAD) * 800 * FLIGHT_PAUSE_FACTOR);
 
 startButton.addEventListener('click', () => {
 
@@ -320,10 +320,23 @@ const revealObserver = new IntersectionObserver((entries, observer) => {
     }
 }, {
     // Порог: блок должен показаться в окне хотя бы на четверть
-    threshold: 0.25
+    threshold: 1
 });
 
 // Подписываем наблюдателя на все блоки с классом .reveal
 for (const element of document.querySelectorAll('.reveal')) {
     revealObserver.observe(element);
 }
+
+
+/* ============================================================
+ * КЛИК ПО БОЛЬШОЙ КНОПКЕ («Большое сообщение»)
+ * ============================================================ */
+const bigButton = document.getElementById('bigButton');
+if (bigButton) {
+    bigButton.addEventListener('click', () => {
+        // Здесь будет твоё действие (открытие письма, модалка, переход и т.д.)
+        console.log('Клик по большой кнопке!');
+    });
+}
+

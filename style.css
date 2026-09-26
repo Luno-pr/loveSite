@@ -149,7 +149,7 @@ body:not(.is-open) .screen:not(:first-of-type) {
 
     opacity: 0;                                /* пока невидим */
     transform: translateY(24px) scale(0.96);   /* и чуть ниже и чуть меньше */
-    transition: opacity 2s ease, transform 2s ease;
+    transition: opacity 1.5s ease, transform 1.5s ease;
 }
 
 /* Состояние «пора показать»: класс добавляет JavaScript с задержкой */
@@ -185,15 +185,26 @@ body:not(.is-open) .screen:not(:first-of-type) {
     font-size: 30px;
 }
 
-.bigButt{
+.bigButt {
     display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     border-style: solid;
     border-width: 1px;
     background-color: #1f1f1f88;
     border-color: #ffffffbb;
     border-radius: 999px;
-    padding: 30px;
+    padding: 24px 48px;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    outline: none;
+    transition: transform 0.2s ease;
+}
+
+.bigButt:hover{
+    transform: scale(1.05);
 }
 
 /* ============================================================
@@ -205,11 +216,11 @@ body:not(.is-open) .screen:not(:first-of-type) {
    ============================================================ */
 .reveal {
     opacity: 0;
-    transform: translateY(24px) scale(0.96);
-    transition: opacity 2s ease, transform 2s ease;
+    translate: 0 24px;
+    transition: opacity 2s ease, translate 2s ease;
 }
 
 .reveal.is-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    translate: 0 0;
 }
