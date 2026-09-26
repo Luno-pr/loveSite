@@ -53,11 +53,11 @@ body:not(.is-open) .screen:not(:first-of-type) {
     text-align: center;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
+    /* border-radius: 20px;
     background-color: #050510;
     border-style: solid;
     border-width: 1px;
-    border-color: #202020;
+    border-color: #202020; */
     padding: 30px;
     height: 10vh;
 }
@@ -128,6 +128,14 @@ body:not(.is-open) .screen:not(:first-of-type) {
     padding: 24px;
 }
 
+.screenButt {
+    min-height: 30vh;
+    min-height: 30dvh;   /* на телефонах: реальная высота без панелей браузера */
+    display: grid;
+    place-items: center;  /* центрируем по горизонтали и вертикали */
+    padding: 24px;
+}
+
 .welcomeBox,
 .finalMessage {
     grid-area: 1 / 1;     /* одна и та же ячейка -> блоки накладываются */
@@ -157,7 +165,6 @@ body:not(.is-open) .screen:not(:first-of-type) {
     font-weight: bold;
     color: #f2ecff;
     /* свечение вокруг букв вместо твёрдой тени — в стиле ночного неба */
-    text-shadow: 0 0 12px rgba(160, 120, 255, 0.6), 0 0 30px rgba(120, 80, 255, 0.35);
 }
 
 /* Заглушка во второй секции — замени своим содержимым */
@@ -170,4 +177,39 @@ body:not(.is-open) .screen:not(:first-of-type) {
 .selebrate{
     color: #ffffff;
     font-size: 35px;
+    text-shadow: 0 0 12px rgba(160, 120, 255, 0.6), 0 0 30px rgba(120, 80, 255, 0.35);
+}
+
+.buttText{
+    color: #ffffff;
+    font-size: 30px;
+}
+
+.bigButt{
+    display: flex;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    background-color: #1f1f1f88;
+    border-color: #ffffffbb;
+    border-radius: 999px;
+    padding: 30px;
+}
+
+/* ============================================================
+   ПОЯВЛЕНИЕ БЛОКОВ ПРИ ПРОКРУТКЕ
+   Тот же эффект, что у .finalMessage: блок сначала невидим
+   и чуть ниже/меньше, потом плавно встаёт на место.
+   Класс .reveal стоит в HTML, а .is-visible добавляет JS,
+   когда блок попадает в видимую область окна.
+   ============================================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+    transition: opacity 2s ease, transform 2s ease;
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
 }

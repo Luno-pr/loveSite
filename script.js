@@ -300,3 +300,30 @@ startButton.addEventListener('click', () => {
     }, STAR_FLIGHT_MS);
 });
 
+/* ============================================================
+ * ПОЯВЛЕНИЕ БЛОКОВ ПРИ ПРОКРУТКЕ
+ * IntersectionObserver — встроенный «наблюдатель» браузера.
+ * Он сам следит за элементами и сообщает, когда элемент
+ * попадает в видимую область окна (или уходит из неё).
+ * ============================================================ */
+const revealObserver = new IntersectionObserver((entries, observer) => {
+    for (const entry of entries) {
+        // Нас интересует только случай «блок ПОПАЛ в экран»
+        if (!entry.isIntersecting) continue;
+
+        // Тот же класс-переключатель, что использует .finalMessage:
+        // плавность обеспечивает CSS, а не JavaScript
+        entry.target.classList.add('is-visible');
+
+        // Анимация одноразовая: дальше за этим блоком следить не нужно
+        observer.unobserve(entry.target);
+    }
+}, {
+    // Порог: блок должен показаться в окне хотя бы на четверть
+    threshold: 0.25
+});
+
+// Подписываем наблюдателя на все блоки с классом .reveal
+for (const element of document.querySelectorAll('.reveal')) {
+    revealObserver.observe(element);
+}
